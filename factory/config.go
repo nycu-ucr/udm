@@ -5,7 +5,7 @@
 package factory
 
 import (
-	"github.com/free5gc/logger_util"
+	"github.com/nycu-ucr/logger_util"
 )
 
 const (

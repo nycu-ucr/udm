@@ -8,10 +8,10 @@ import (
 	"sync"
 
 	"github.com/free5gc/idgenerator"
-	"github.com/free5gc/openapi"
-	"github.com/free5gc/openapi/Nnrf_NFDiscovery"
-	"github.com/free5gc/openapi/models"
-	"github.com/free5gc/udm/factory"
+	"github.com/nycu-ucr/openapi"
+	"github.com/nycu-ucr/openapi/Nnrf_NFDiscovery"
+	"github.com/nycu-ucr/openapi/models"
+	"github.com/nycu-ucr/udm/factory"
 )
 
 var udmContext UDMContext

@@ -2,13 +2,14 @@ package callback
 
 import (
 	"context"
-	"net/http"
 
-	"github.com/free5gc/openapi/Nudm_SubscriberDataManagement"
-	"github.com/free5gc/openapi/Nudm_UEContextManagement"
-	"github.com/free5gc/openapi/models"
-	udm_context "github.com/free5gc/udm/context"
-	"github.com/free5gc/udm/logger"
+	"github.com/nycu-ucr/gonet/http"
+
+	"github.com/nycu-ucr/openapi/Nudm_SubscriberDataManagement"
+	"github.com/nycu-ucr/openapi/Nudm_UEContextManagement"
+	"github.com/nycu-ucr/openapi/models"
+	udm_context "github.com/nycu-ucr/udm/context"
+	"github.com/nycu-ucr/udm/logger"
 )
 
 func DataChangeNotificationProcedure(notifyItems []models.NotifyItem, supi string) *models.ProblemDetails {

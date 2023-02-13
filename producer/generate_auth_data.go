@@ -7,23 +7,22 @@ import (
 	"fmt"
 	"math/big"
 	"math/rand"
-	"net/http"
 	"reflect"
 	"strings"
 	"time"
 
 	"github.com/antihax/optional"
-
 	"github.com/free5gc/UeauCommon"
-	"github.com/free5gc/http_wrapper"
 	"github.com/free5gc/milenage"
-	"github.com/free5gc/openapi"
-	"github.com/free5gc/openapi/Nudr_DataRepository"
-	"github.com/free5gc/openapi/models"
-	udm_context "github.com/free5gc/udm/context"
-	"github.com/free5gc/udm/logger"
-	"github.com/free5gc/udm/util"
 	"github.com/free5gc/util_3gpp/suci"
+	"github.com/nycu-ucr/gonet/http"
+	"github.com/nycu-ucr/http_wrapper"
+	"github.com/nycu-ucr/openapi"
+	"github.com/nycu-ucr/openapi/Nudr_DataRepository"
+	"github.com/nycu-ucr/openapi/models"
+	udm_context "github.com/nycu-ucr/udm/context"
+	"github.com/nycu-ucr/udm/logger"
+	"github.com/nycu-ucr/udm/util"
 )
 
 const (

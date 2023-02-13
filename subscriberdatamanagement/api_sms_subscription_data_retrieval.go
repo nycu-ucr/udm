@@ -10,9 +10,9 @@
 package subscriberdatamanagement
 
 import (
-	"net/http"
+	"github.com/nycu-ucr/gonet/http"
 
-	"github.com/gin-gonic/gin"
+	"github.com/nycu-ucr/gin"
 )
 
 // GetSmsData - retrieve a UE's SMS Subscription Data

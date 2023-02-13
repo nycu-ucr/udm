@@ -3,13 +3,14 @@ package consumer
 import (
 	"context"
 	"fmt"
-	"net/http"
 
-	"github.com/free5gc/openapi/Nnrf_NFDiscovery"
-	"github.com/free5gc/openapi/models"
-	udm_context "github.com/free5gc/udm/context"
-	"github.com/free5gc/udm/logger"
-	"github.com/free5gc/udm/util"
+	"github.com/nycu-ucr/gonet/http"
+
+	"github.com/nycu-ucr/openapi/Nnrf_NFDiscovery"
+	"github.com/nycu-ucr/openapi/models"
+	udm_context "github.com/nycu-ucr/udm/context"
+	"github.com/nycu-ucr/udm/logger"
+	"github.com/nycu-ucr/udm/util"
 )
 
 const (

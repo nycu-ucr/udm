@@ -7,9 +7,9 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/urfave/cli"
 
-	"github.com/free5gc/udm/logger"
-	"github.com/free5gc/udm/service"
 	"github.com/free5gc/version"
+	"github.com/nycu-ucr/udm/logger"
+	"github.com/nycu-ucr/udm/service"
 )
 
 var UDM = &service.UDM{}

@@ -2,13 +2,14 @@ package producer
 
 import (
 	"context"
-	"net/http"
 
-	"github.com/free5gc/http_wrapper"
-	"github.com/free5gc/openapi"
-	"github.com/free5gc/openapi/models"
-	"github.com/free5gc/udm/logger"
-	"github.com/free5gc/udm/util"
+	"github.com/nycu-ucr/gonet/http"
+
+	"github.com/nycu-ucr/http_wrapper"
+	"github.com/nycu-ucr/openapi"
+	"github.com/nycu-ucr/openapi/models"
+	"github.com/nycu-ucr/udm/logger"
+	"github.com/nycu-ucr/udm/util"
 )
 
 func HandleUpdateRequest(request *http_wrapper.Request) *http_wrapper.Response {

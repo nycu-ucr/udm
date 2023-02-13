@@ -1,14 +1,15 @@
 package producer
 
 import (
-	"net/http"
 	"strconv"
 	"strings"
 
-	"github.com/free5gc/http_wrapper"
-	"github.com/free5gc/openapi/models"
-	udm_context "github.com/free5gc/udm/context"
-	"github.com/free5gc/udm/logger"
+	"github.com/nycu-ucr/gonet/http"
+
+	"github.com/nycu-ucr/http_wrapper"
+	"github.com/nycu-ucr/openapi/models"
+	udm_context "github.com/nycu-ucr/udm/context"
+	"github.com/nycu-ucr/udm/logger"
 )
 
 func HandleCreateEeSubscription(request *http_wrapper.Request) *http_wrapper.Response {

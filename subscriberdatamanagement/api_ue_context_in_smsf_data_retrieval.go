@@ -10,9 +10,9 @@
 package subscriberdatamanagement
 
 import (
-	"net/http"
+	"github.com/nycu-ucr/gonet/http"
 
-	"github.com/gin-gonic/gin"
+	"github.com/nycu-ucr/gin"
 )
 
 // GetUeContextInSmsfData - retrieve a UE's UE Context In SMSF Data
