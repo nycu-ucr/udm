@@ -17,7 +17,7 @@ require (
 	github.com/free5gc/version v1.0.0
 	github.com/google/uuid v1.1.2
 	github.com/nycu-ucr/gin v0.0.0-20221108140334-9ba2d17cede5
-	github.com/nycu-ucr/gonet v0.0.0-20230213095244-36b1b1195802
+	github.com/nycu-ucr/gonet v0.0.0-20230214053946-2f5515604c06
 	github.com/nycu-ucr/http2_util v0.0.0-20230213074247-99b574560ae4
 	github.com/nycu-ucr/http_wrapper v0.0.0-20221108133141-f494ef72e89f
 	github.com/nycu-ucr/logger_util v0.0.0-20221108143044-7079981b07b7
