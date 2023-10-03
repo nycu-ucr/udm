@@ -2,11 +2,11 @@ package callback
 
 import (
 	"context"
-	"net/http"
+	"github.com/nycu-ucr/gonet/http"
 
-	"github.com/free5gc/openapi/Nudm_SubscriberDataManagement"
-	"github.com/free5gc/openapi/Nudm_UEContextManagement"
-	"github.com/free5gc/openapi/models"
+	"github.com/nycu-ucr/openapi/Nudm_SubscriberDataManagement"
+	"github.com/nycu-ucr/openapi/Nudm_UEContextManagement"
+	"github.com/nycu-ucr/openapi/models"
 	udm_context "github.com/free5gc/udm/internal/context"
 	"github.com/free5gc/udm/internal/logger"
 )

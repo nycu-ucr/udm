@@ -10,9 +10,9 @@
 package uecontextmanagement
 
 import (
-	"net/http"
+	"github.com/nycu-ucr/gonet/http"
 
-	"github.com/gin-gonic/gin"
+	"github.com/nycu-ucr/gin"
 )
 
 // GetSmsfNon3gppAccess - retrieve the SMSF registration for non-3GPP access information

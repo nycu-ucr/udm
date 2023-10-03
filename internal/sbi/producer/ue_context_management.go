@@ -3,20 +3,20 @@ package producer
 import (
 	"context"
 	"fmt"
-	"net/http"
+	"github.com/nycu-ucr/gonet/http"
 	"strconv"
 	"strings"
 
 	"github.com/antihax/optional"
 
-	"github.com/free5gc/openapi"
-	"github.com/free5gc/openapi/Nudr_DataRepository"
-	"github.com/free5gc/openapi/models"
+	"github.com/nycu-ucr/openapi"
+	"github.com/nycu-ucr/openapi/Nudr_DataRepository"
+	"github.com/nycu-ucr/openapi/models"
 	udm_context "github.com/free5gc/udm/internal/context"
 	"github.com/free5gc/udm/internal/logger"
 	"github.com/free5gc/udm/internal/sbi/consumer"
 	"github.com/free5gc/udm/internal/sbi/producer/callback"
-	"github.com/free5gc/util/httpwrapper"
+	"github.com/nycu-ucr/util/httpwrapper"
 )
 
 func createUDMClientToUDR(id string) (*Nudr_DataRepository.APIClient, error) {

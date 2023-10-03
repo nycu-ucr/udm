@@ -10,10 +10,10 @@
 package eventexposure
 
 import (
-	"github.com/gin-gonic/gin"
+	"github.com/nycu-ucr/gin"
 
 	"github.com/free5gc/udm/internal/sbi/producer"
-	"github.com/free5gc/util/httpwrapper"
+	"github.com/nycu-ucr/util/httpwrapper"
 )
 
 // DeleteEeSubscription - Unsubscribe
