@@ -1,4 +1,4 @@
-module github.com/free5gc/udm
+module github.com/nycu-ucr/udm
 
 go 1.17
 
