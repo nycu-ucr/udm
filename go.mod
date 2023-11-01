@@ -1,4 +1,4 @@
-module github.com/nycu-ucr/udm
+module github.com/free5gc/udm
 
 go 1.17
 
@@ -7,8 +7,8 @@ require (
 	github.com/asaskevich/govalidator v0.0.0-20210307081110-f21760c49a8d
 	github.com/google/uuid v1.3.0
 	github.com/nycu-ucr/gin v0.0.0-20230307121200-573befe2dfbe
-	github.com/nycu-ucr/gonet v0.0.0-20230328095129-6e9ca74b90b5
-	github.com/nycu-ucr/openapi v0.0.0-20230928123234-3c11228b5e01
+	github.com/nycu-ucr/gonet v0.0.0-20231031091538-7b378fb19c77
+	github.com/nycu-ucr/openapi v0.0.0-20231031092106-c3b6f720a550
 	github.com/nycu-ucr/util v0.0.0-20230928120650-6ed674c090b3
 	github.com/sirupsen/logrus v1.9.0
 	github.com/urfave/cli v1.22.5
@@ -36,9 +36,9 @@ require (
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/nycu-ucr/gock v0.0.0-20230928062355-60066588379a // indirect
-	github.com/nycu-ucr/net v0.0.0-20230321075841-be2b9a37bf1d // indirect
+	github.com/nycu-ucr/net v0.0.0-20231031091433-d01d59c308c0 // indirect
 	github.com/nycu-ucr/oauth2 v0.0.0-20230927074609-e939447bd9b2 // indirect
-	github.com/nycu-ucr/onvmpoller v0.0.0-20230328094138-e24131a655bb // indirect
+	github.com/nycu-ucr/onvmpoller v0.0.0-20230807070551-64ddd3797912 // indirect
 	github.com/nycu-ucr/sse v0.0.0-20221108140034-8e09fddc7347 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.6 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
