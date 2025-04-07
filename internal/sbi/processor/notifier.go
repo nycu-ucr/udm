@@ -1,13 +1,13 @@
 package processor
 
 import (
-	"github.com/gin-gonic/gin"
+	"github.com/nycu-ucr/gin"
 
-	"github.com/free5gc/openapi"
-	"github.com/free5gc/openapi/models"
-	"github.com/free5gc/openapi/udm/SubscriberDataManagement"
-	"github.com/free5gc/openapi/udm/UEContextManagement"
-	"github.com/free5gc/udm/internal/logger"
+	"github.com/nycu-ucr/openapi"
+	"github.com/nycu-ucr/openapi/models"
+	"github.com/nycu-ucr/openapi/udm/SubscriberDataManagement"
+	"github.com/nycu-ucr/openapi/udm/UEContextManagement"
+	"github.com/nycu-ucr/udm/internal/logger"
 )
 
 func (p *Processor) DataChangeNotificationProcedure(c *gin.Context,

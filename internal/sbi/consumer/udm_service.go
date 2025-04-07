@@ -3,8 +3,8 @@ package consumer
 import (
 	"sync"
 
-	Nudm_SubscriberDataManagement "github.com/free5gc/openapi/udm/SubscriberDataManagement"
-	Nudm_UEContextManagement "github.com/free5gc/openapi/udm/UEContextManagement"
+	Nudm_SubscriberDataManagement "github.com/nycu-ucr/openapi/udm/SubscriberDataManagement"
+	Nudm_UEContextManagement "github.com/nycu-ucr/openapi/udm/UEContextManagement"
 )
 
 type nudmService struct {

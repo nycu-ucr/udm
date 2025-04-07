@@ -1,14 +1,14 @@
 package sbi
 
 import (
-	"net/http"
+	"github.com/nycu-ucr/gonet/http"
 
-	"github.com/gin-gonic/gin"
+	"github.com/nycu-ucr/gin"
 
-	"github.com/free5gc/openapi"
-	"github.com/free5gc/openapi/models"
-	Nudr_DataRepository "github.com/free5gc/openapi/udr/DataRepository"
-	"github.com/free5gc/udm/internal/logger"
+	"github.com/nycu-ucr/openapi"
+	"github.com/nycu-ucr/openapi/models"
+	Nudr_DataRepository "github.com/nycu-ucr/openapi/udr/DataRepository"
+	"github.com/nycu-ucr/udm/internal/logger"
 )
 
 func (s *Server) getUEContextManagementRoutes() []Route {

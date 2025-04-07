@@ -1,12 +1,12 @@
 package consumer
 
 import (
-	Nnrf_NFDiscovery "github.com/free5gc/openapi/nrf/NFDiscovery"
-	Nnrf_NFManagement "github.com/free5gc/openapi/nrf/NFManagement"
-	Nudm_SubscriberDataManagement "github.com/free5gc/openapi/udm/SubscriberDataManagement"
-	Nudm_UEContextManagement "github.com/free5gc/openapi/udm/UEContextManagement"
-	Nudr_DataRepository "github.com/free5gc/openapi/udr/DataRepository"
-	"github.com/free5gc/udm/pkg/app"
+	Nnrf_NFDiscovery "github.com/nycu-ucr/openapi/nrf/NFDiscovery"
+	Nnrf_NFManagement "github.com/nycu-ucr/openapi/nrf/NFManagement"
+	Nudm_SubscriberDataManagement "github.com/nycu-ucr/openapi/udm/SubscriberDataManagement"
+	Nudm_UEContextManagement "github.com/nycu-ucr/openapi/udm/UEContextManagement"
+	Nudr_DataRepository "github.com/nycu-ucr/openapi/udr/DataRepository"
+	"github.com/nycu-ucr/udm/pkg/app"
 )
 
 type ConsumerUdm interface {

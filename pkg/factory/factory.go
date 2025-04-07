@@ -11,7 +11,7 @@ import (
 	"github.com/asaskevich/govalidator"
 	"gopkg.in/yaml.v2"
 
-	"github.com/free5gc/udm/internal/logger"
+	"github.com/nycu-ucr/udm/internal/logger"
 )
 
 var UdmConfig *Config

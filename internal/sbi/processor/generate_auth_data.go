@@ -6,20 +6,20 @@ import (
 	"fmt"
 	"math/big"
 	"math/rand"
-	"net/http"
+	"github.com/nycu-ucr/gonet/http"
 	"reflect"
 	"strings"
 	"time"
 
-	"github.com/gin-gonic/gin"
+	"github.com/nycu-ucr/gin"
 
-	"github.com/free5gc/openapi"
-	"github.com/free5gc/openapi/models"
-	Nudr_DataRepository "github.com/free5gc/openapi/udr/DataRepository"
-	"github.com/free5gc/udm/internal/logger"
-	"github.com/free5gc/udm/pkg/suci"
-	"github.com/free5gc/util/milenage"
-	"github.com/free5gc/util/ueauth"
+	"github.com/nycu-ucr/openapi"
+	"github.com/nycu-ucr/openapi/models"
+	Nudr_DataRepository "github.com/nycu-ucr/openapi/udr/DataRepository"
+	"github.com/nycu-ucr/udm/internal/logger"
+	"github.com/nycu-ucr/udm/pkg/suci"
+	"github.com/nycu-ucr/util/milenage"
+	"github.com/nycu-ucr/util/ueauth"
 )
 
 const (

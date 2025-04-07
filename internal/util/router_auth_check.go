@@ -1,13 +1,13 @@
 package util
 
 import (
-	"net/http"
+	"github.com/nycu-ucr/gonet/http"
 
-	"github.com/gin-gonic/gin"
+	"github.com/nycu-ucr/gin"
 
-	"github.com/free5gc/openapi/models"
-	udm_context "github.com/free5gc/udm/internal/context"
-	"github.com/free5gc/udm/internal/logger"
+	"github.com/nycu-ucr/openapi/models"
+	udm_context "github.com/nycu-ucr/udm/internal/context"
+	"github.com/nycu-ucr/udm/internal/logger"
 )
 
 type NFContextGetter func() *udm_context.UDMContext

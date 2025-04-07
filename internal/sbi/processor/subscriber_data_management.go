@@ -2,17 +2,17 @@ package processor
 
 import (
 	"encoding/json"
-	"net/http"
+	"github.com/nycu-ucr/gonet/http"
 	"strconv"
 
-	"github.com/gin-gonic/gin"
+	"github.com/nycu-ucr/gin"
 
-	"github.com/free5gc/openapi"
-	"github.com/free5gc/openapi/models"
-	"github.com/free5gc/openapi/udm/SubscriberDataManagement"
-	Nudr_DataRepository "github.com/free5gc/openapi/udr/DataRepository"
-	udm_context "github.com/free5gc/udm/internal/context"
-	"github.com/free5gc/udm/internal/logger"
+	"github.com/nycu-ucr/openapi"
+	"github.com/nycu-ucr/openapi/models"
+	"github.com/nycu-ucr/openapi/udm/SubscriberDataManagement"
+	Nudr_DataRepository "github.com/nycu-ucr/openapi/udr/DataRepository"
+	udm_context "github.com/nycu-ucr/udm/internal/context"
+	"github.com/nycu-ucr/udm/internal/logger"
 )
 
 func (p *Processor) GetAmDataProcedure(c *gin.Context, supi string, plmnID string, supportedFeatures string) {

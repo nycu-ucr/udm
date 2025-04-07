@@ -9,15 +9,15 @@ import (
 
 	"github.com/sirupsen/logrus"
 
-	"github.com/free5gc/openapi"
-	"github.com/free5gc/openapi/nrf/NFManagement"
-	udm_context "github.com/free5gc/udm/internal/context"
-	"github.com/free5gc/udm/internal/logger"
-	"github.com/free5gc/udm/internal/sbi"
-	"github.com/free5gc/udm/internal/sbi/consumer"
-	"github.com/free5gc/udm/internal/sbi/processor"
-	"github.com/free5gc/udm/pkg/app"
-	"github.com/free5gc/udm/pkg/factory"
+	"github.com/nycu-ucr/openapi"
+	"github.com/nycu-ucr/openapi/nrf/NFManagement"
+	udm_context "github.com/nycu-ucr/udm/internal/context"
+	"github.com/nycu-ucr/udm/internal/logger"
+	"github.com/nycu-ucr/udm/internal/sbi"
+	"github.com/nycu-ucr/udm/internal/sbi/consumer"
+	"github.com/nycu-ucr/udm/internal/sbi/processor"
+	"github.com/nycu-ucr/udm/pkg/app"
+	"github.com/nycu-ucr/udm/pkg/factory"
 )
 
 var _ app.App = &UdmApp{}

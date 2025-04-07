@@ -8,9 +8,9 @@ import (
 	"github.com/stretchr/testify/require"
 	"go.uber.org/mock/gomock"
 
-	"github.com/free5gc/openapi"
-	udm_context "github.com/free5gc/udm/internal/context"
-	"github.com/free5gc/udm/pkg/app"
+	"github.com/nycu-ucr/openapi"
+	udm_context "github.com/nycu-ucr/udm/internal/context"
+	"github.com/nycu-ucr/udm/pkg/app"
 )
 
 func TestSendRegisterNFInstance(t *testing.T) {

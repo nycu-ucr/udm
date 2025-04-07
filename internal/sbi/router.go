@@ -1,7 +1,7 @@
 package sbi
 
 import (
-	"github.com/gin-gonic/gin"
+	"github.com/nycu-ucr/gin"
 )
 
 // Route is the information for every URI.

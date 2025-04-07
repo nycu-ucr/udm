@@ -11,14 +11,14 @@ import (
 
 	"github.com/google/uuid"
 
-	"github.com/free5gc/openapi"
-	"github.com/free5gc/openapi/models"
-	Nnrf_NFDiscovery "github.com/free5gc/openapi/nrf/NFDiscovery"
-	"github.com/free5gc/openapi/oauth"
-	"github.com/free5gc/udm/internal/logger"
-	"github.com/free5gc/udm/pkg/factory"
-	"github.com/free5gc/udm/pkg/suci"
-	"github.com/free5gc/util/idgenerator"
+	"github.com/nycu-ucr/openapi"
+	"github.com/nycu-ucr/openapi/models"
+	Nnrf_NFDiscovery "github.com/nycu-ucr/openapi/nrf/NFDiscovery"
+	"github.com/nycu-ucr/openapi/oauth"
+	"github.com/nycu-ucr/udm/internal/logger"
+	"github.com/nycu-ucr/udm/pkg/factory"
+	"github.com/nycu-ucr/udm/pkg/suci"
+	"github.com/nycu-ucr/util/idgenerator"
 )
 
 var udmContext = UDMContext{}

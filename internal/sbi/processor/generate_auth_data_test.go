@@ -2,19 +2,19 @@ package processor
 
 import (
 	"io"
-	"net/http/httptest"
+	"github.com/nycu-ucr/gonet/http/httptest"
 	"testing"
 
-	"github.com/gin-gonic/gin"
+	"github.com/nycu-ucr/gin"
 	"github.com/h2non/gock"
 	"github.com/stretchr/testify/require"
 	"go.uber.org/mock/gomock"
 
-	"github.com/free5gc/openapi"
-	"github.com/free5gc/openapi/models"
-	udm_context "github.com/free5gc/udm/internal/context"
-	"github.com/free5gc/udm/internal/sbi/consumer"
-	mockapp "github.com/free5gc/udm/pkg/mockapp"
+	"github.com/nycu-ucr/openapi"
+	"github.com/nycu-ucr/openapi/models"
+	udm_context "github.com/nycu-ucr/udm/internal/context"
+	"github.com/nycu-ucr/udm/internal/sbi/consumer"
+	mockapp "github.com/nycu-ucr/udm/pkg/mockapp"
 )
 
 func TestGenerateAuthDataProcedure(t *testing.T) {

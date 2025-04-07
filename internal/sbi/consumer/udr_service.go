@@ -5,9 +5,9 @@ import (
 	"strings"
 	"sync"
 
-	Nudr_DataRepository "github.com/free5gc/openapi/udr/DataRepository"
-	udm_context "github.com/free5gc/udm/internal/context"
-	"github.com/free5gc/udm/internal/logger"
+	Nudr_DataRepository "github.com/nycu-ucr/openapi/udr/DataRepository"
+	udm_context "github.com/nycu-ucr/udm/internal/context"
+	"github.com/nycu-ucr/udm/internal/logger"
 )
 
 type nudrService struct {

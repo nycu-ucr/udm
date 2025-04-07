@@ -1,16 +1,16 @@
 package processor
 
 import (
-	"net/http"
+	"github.com/nycu-ucr/gonet/http"
 	"strconv"
 
-	"github.com/gin-gonic/gin"
+	"github.com/nycu-ucr/gin"
 
-	"github.com/free5gc/openapi"
-	"github.com/free5gc/openapi/models"
-	Nudr_DataRepository "github.com/free5gc/openapi/udr/DataRepository"
-	udm_context "github.com/free5gc/udm/internal/context"
-	"github.com/free5gc/udm/internal/logger"
+	"github.com/nycu-ucr/openapi"
+	"github.com/nycu-ucr/openapi/models"
+	Nudr_DataRepository "github.com/nycu-ucr/openapi/udr/DataRepository"
+	udm_context "github.com/nycu-ucr/udm/internal/context"
+	"github.com/nycu-ucr/udm/internal/logger"
 )
 
 // ue_context_managemanet_service

@@ -12,8 +12,8 @@ import (
 
 	"github.com/asaskevich/govalidator"
 
-	"github.com/free5gc/udm/internal/logger"
-	"github.com/free5gc/udm/pkg/suci"
+	"github.com/nycu-ucr/udm/internal/logger"
+	"github.com/nycu-ucr/udm/pkg/suci"
 )
 
 const (
