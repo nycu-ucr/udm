@@ -1,9 +1,9 @@
 package util
 
 import (
-	"github.com/nycu-ucr/gonet/http"
+	"net/http"
 
-	"github.com/nycu-ucr/openapi/models"
+	"github.com/free5gc/openapi/models"
 )
 
 const (

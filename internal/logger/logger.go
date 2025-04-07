@@ -3,7 +3,7 @@ package logger
 import (
 	"github.com/sirupsen/logrus"
 
-	logger_util "github.com/nycu-ucr/util/logger"
+	logger_util "github.com/free5gc/util/logger"
 )
 
 var (
@@ -14,6 +14,7 @@ var (
 	CfgLog      *logrus.Entry
 	CtxLog      *logrus.Entry
 	GinLog      *logrus.Entry
+	SBILog      *logrus.Entry
 	ConsumerLog *logrus.Entry
 	HttpLog     *logrus.Entry
 	UeauLog     *logrus.Entry
@@ -40,6 +41,7 @@ func init() {
 	CfgLog = NfLog.WithField(logger_util.FieldCategory, "CFG")
 	CtxLog = NfLog.WithField(logger_util.FieldCategory, "CTX")
 	GinLog = NfLog.WithField(logger_util.FieldCategory, "GIN")
+	SBILog = NfLog.WithField(logger_util.FieldCategory, "SBI")
 	ConsumerLog = NfLog.WithField(logger_util.FieldCategory, "Consumer")
 	ProcLog = NfLog.WithField(logger_util.FieldCategory, "Proc")
 	HttpLog = NfLog.WithField(logger_util.FieldCategory, "HTTP")

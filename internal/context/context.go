@@ -1,6 +1,7 @@
 package context
 
 import (
+	"context"
 	"fmt"
 	"math"
 	"os"
@@ -10,16 +11,17 @@ import (
 
 	"github.com/google/uuid"
 
-	"github.com/nycu-ucr/openapi"
-	"github.com/nycu-ucr/openapi/Nnrf_NFDiscovery"
-	"github.com/nycu-ucr/openapi/models"
+	"github.com/free5gc/openapi"
+	"github.com/free5gc/openapi/models"
+	Nnrf_NFDiscovery "github.com/free5gc/openapi/nrf/NFDiscovery"
+	"github.com/free5gc/openapi/oauth"
 	"github.com/free5gc/udm/internal/logger"
 	"github.com/free5gc/udm/pkg/factory"
 	"github.com/free5gc/udm/pkg/suci"
-	"github.com/nycu-ucr/util/idgenerator"
+	"github.com/free5gc/util/idgenerator"
 )
 
-var udmContext UDMContext
+var udmContext = UDMContext{}
 
 const (
 	LocationUriAmf3GppAccessRegistration int = iota
@@ -30,9 +32,16 @@ const (
 )
 
 func Init() {
-	Getself().NfService = make(map[models.ServiceName]models.NfService)
-	Getself().EeSubscriptionIDGenerator = idgenerator.NewGenerator(1, math.MaxInt32)
+	GetSelf().NfService = make(map[models.ServiceName]models.NrfNfManagementNfService)
+	GetSelf().EeSubscriptionIDGenerator = idgenerator.NewGenerator(1, math.MaxInt32)
+	InitUdmContext(GetSelf())
 }
+
+type NFContext interface {
+	AuthorizationCheck(token string, serviceName models.ServiceName) error
+}
+
+var _ NFContext = &UDMContext{}
 
 type UDMContext struct {
 	NfId                           string
@@ -41,15 +50,17 @@ type UDMContext struct {
 	RegisterIPv4                   string // IP register to NRF
 	BindingIPv4                    string
 	UriScheme                      models.UriScheme
-	NfService                      map[models.ServiceName]models.NfService
+	NfService                      map[models.ServiceName]models.NrfNfManagementNfService
 	NFDiscoveryClient              *Nnrf_NFDiscovery.APIClient
 	UdmUePool                      sync.Map // map[supi]*UdmUeContext
 	NrfUri                         string
+	NrfCertPem                     string
 	GpsiSupiList                   models.IdentityData
-	SharedSubsDataMap              map[string]models.SharedData // sharedDataIds as key
-	SubscriptionOfSharedDataChange sync.Map                     // subscriptionID as key
+	SharedSubsDataMap              map[string]models.UdmSdmSharedData // sharedDataIds as key
+	SubscriptionOfSharedDataChange sync.Map                           // subscriptionID as key
 	SuciProfiles                   []suci.SuciProfile
 	EeSubscriptionIDGenerator      *idgenerator.IDGenerator
+	OAuth2Required                 bool
 }
 
 type UdmUeContext struct {
@@ -65,13 +76,13 @@ type UdmUeContext struct {
 	TraceDataResponse                 models.TraceDataResponse
 	TraceData                         *models.TraceData
 	SessionManagementSubsData         map[string]models.SessionManagementSubscriptionData
-	SubsDataSets                      *models.SubscriptionDataSets
+	SubsDataSets                      *models.UdmSdmSubscriptionDataSets
 	SubscribeToNotifChange            map[string]*models.SdmSubscription
 	SubscribeToNotifSharedDataChange  *models.SdmSubscription
 	PduSessionID                      string
 	UdrUri                            string
 	UdmSubsToNotify                   map[string]*models.SubscriptionDataSubscriptions
-	EeSubscriptions                   map[string]*models.EeSubscription // subscriptionID as key
+	EeSubscriptions                   map[string]*models.UdmEeEeSubscription // subscriptionID as key
 	amSubsDataLock                    sync.Mutex
 	smfSelSubsDataLock                sync.Mutex
 	SmSubsDataLock                    sync.RWMutex
@@ -79,7 +90,7 @@ type UdmUeContext struct {
 
 func (ue *UdmUeContext) Init() {
 	ue.UdmSubsToNotify = make(map[string]*models.SubscriptionDataSubscriptions)
-	ue.EeSubscriptions = make(map[string]*models.EeSubscription)
+	ue.EeSubscriptions = make(map[string]*models.UdmEeEeSubscription)
 	ue.SubscribeToNotifChange = make(map[string]*models.SdmSubscription)
 }
 
@@ -121,6 +132,7 @@ func InitUdmContext(context *UDMContext) {
 		}
 	}
 	udmContext.NrfUri = configuration.NrfUri
+	context.NrfCertPem = configuration.NrfCertPem
 	servingNameList := configuration.ServiceNameList
 
 	udmContext.SuciProfiles = configuration.SuciProfiles
@@ -158,15 +170,17 @@ func (context *UDMContext) ManageSmData(smDatafromUDR []models.SessionManagement
 }
 
 // HandleGetSharedData related functions
-func MappingSharedData(sharedDatafromUDR []models.SharedData) (mp map[string]models.SharedData) {
-	sharedSubsDataMap := make(map[string]models.SharedData)
+func MappingSharedData(sharedDatafromUDR []models.UdmSdmSharedData) (mp map[string]models.UdmSdmSharedData) {
+	sharedSubsDataMap := make(map[string]models.UdmSdmSharedData)
 	for i := 0; i < len(sharedDatafromUDR); i++ {
 		sharedSubsDataMap[sharedDatafromUDR[i].SharedDataId] = sharedDatafromUDR[i]
 	}
 	return sharedSubsDataMap
 }
 
-func ObtainRequiredSharedData(Sharedids []string, response []models.SharedData) (sharedDatas []models.SharedData) {
+func ObtainRequiredSharedData(Sharedids []string, response []models.UdmSdmSharedData) (
+	sharedDatas []models.UdmSdmSharedData,
+) {
 	sharedSubsDataMap := MappingSharedData(response)
 	Allkeys := make([]string, len(sharedSubsDataMap))
 	MatchedKeys := make([]string, len(Sharedids))
@@ -184,7 +198,7 @@ func ObtainRequiredSharedData(Sharedids []string, response []models.SharedData) 
 		counter += 1
 	}
 
-	shared_Data := make([]models.SharedData, len(MatchedKeys))
+	shared_Data := make([]models.UdmSdmSharedData, len(MatchedKeys))
 	if len(MatchedKeys) != 1 {
 		for i := 0; i < len(MatchedKeys); i++ {
 			shared_Data[i] = sharedSubsDataMap[MatchedKeys[i]]
@@ -207,7 +221,7 @@ func GetCorrespondingSupi(list models.IdentityData) (id string) {
 }
 
 // functions related to Retrieval of multiple datasets(GetSupi)
-func (context *UDMContext) CreateSubsDataSetsForUe(supi string, body models.SubscriptionDataSets) {
+func (context *UDMContext) CreateSubsDataSetsForUe(supi string, body models.UdmSdmSubscriptionDataSets) {
 	ue, ok := context.UdmUeFindBySupi(supi)
 	if !ok {
 		ue = context.NewUdmUe(supi)
@@ -386,12 +400,12 @@ func (context *UDMContext) GetAmfNon3gppRegContext(supi string) *models.AmfNon3G
 func (ue *UdmUeContext) GetLocationURI(types int) string {
 	switch types {
 	case LocationUriAmf3GppAccessRegistration:
-		return Getself().GetIPv4Uri() + factory.UdmUecmResUriPrefix + "/" + ue.Supi + "/registrations/amf-3gpp-access"
+		return GetSelf().GetIPv4Uri() + factory.UdmUecmResUriPrefix + "/" + ue.Supi + "/registrations/amf-3gpp-access"
 	case LocationUriAmfNon3GppAccessRegistration:
-		return Getself().GetIPv4Uri() + factory.UdmUecmResUriPrefix + "/" + ue.Supi + "/registrations/amf-non-3gpp-access"
+		return GetSelf().GetIPv4Uri() + factory.UdmUecmResUriPrefix + "/" + ue.Supi + "/registrations/amf-non-3gpp-access"
 	case LocationUriSmfRegistration:
 
-		return Getself().GetIPv4Uri() +
+		return GetSelf().GetIPv4Uri() +
 			factory.UdmUecmResUriPrefix + "/" + ue.Supi + "/registrations/smf-registrations/" + ue.PduSessionID
 	}
 	return ""
@@ -400,9 +414,9 @@ func (ue *UdmUeContext) GetLocationURI(types int) string {
 func (ue *UdmUeContext) GetLocationURI2(types int, supi string) string {
 	switch types {
 	case LocationUriSharedDataSubscription:
-		// return Getself().GetIPv4Uri() + UdmSdmResUriPrefix +"/shared-data-subscriptions/" + nf.SubscriptionID
+		// return GetSelf().GetIPv4Uri() + UdmSdmResUriPrefix +"/shared-data-subscriptions/" + nf.SubscriptionID
 	case LocationUriSdmSubscription:
-		return Getself().GetIPv4Uri() + factory.UdmSdmResUriPrefix + "/" + supi + "/sdm-subscriptions/"
+		return GetSelf().GetIPv4Uri() + factory.UdmSdmResUriPrefix + "/" + supi + "/sdm-subscriptions/"
 	}
 	return ""
 }
@@ -455,10 +469,10 @@ func (context *UDMContext) InitNFService(serviceName []string, version string) {
 	versionUri := "v" + tmpVersion[0]
 	for index, nameString := range serviceName {
 		name := models.ServiceName(nameString)
-		context.NfService[name] = models.NfService{
+		context.NfService[name] = models.NrfNfManagementNfService{
 			ServiceInstanceId: strconv.Itoa(index),
 			ServiceName:       name,
-			Versions: &[]models.NfServiceVersion{
+			Versions: []models.NfServiceVersion{
 				{
 					ApiFullVersion:  version,
 					ApiVersionInUri: versionUri,
@@ -467,10 +481,10 @@ func (context *UDMContext) InitNFService(serviceName []string, version string) {
 			Scheme:          context.UriScheme,
 			NfServiceStatus: models.NfServiceStatus_REGISTERED,
 			ApiPrefix:       context.GetIPv4Uri(),
-			IpEndPoints: &[]models.IpEndPoint{
+			IpEndPoints: []models.IpEndPoint{
 				{
 					Ipv4Address: context.RegisterIPv4,
-					Transport:   models.TransportProtocol_TCP,
+					Transport:   models.NrfNfManagementTransportProtocol_TCP,
 					Port:        int32(context.SBIPort),
 				},
 			},
@@ -478,6 +492,29 @@ func (context *UDMContext) InitNFService(serviceName []string, version string) {
 	}
 }
 
-func Getself() *UDMContext {
+func (c *UDMContext) GetTokenCtx(serviceName models.ServiceName, targetNF models.NrfNfManagementNfType) (
+	context.Context, *models.ProblemDetails, error,
+) {
+	if !c.OAuth2Required {
+		return context.TODO(), nil, nil
+	}
+	return oauth.GetTokenCtx(models.NrfNfManagementNfType_UDM, targetNF,
+		c.NfId, c.NrfUri, string(serviceName))
+}
+
+func GetSelf() *UDMContext {
 	return &udmContext
+}
+
+func (context *UDMContext) AuthorizationCheck(token string, serviceName models.ServiceName) error {
+	if !context.OAuth2Required {
+		logger.UtilLog.Debugf("UDMContext::AuthorizationCheck: OAuth2 not required\n")
+		return nil
+	}
+	logger.UtilLog.Debugf("UDMContext::AuthorizationCheck: token[%s] serviceName[%s]\n", token, serviceName)
+	err := oauth.VerifyOAuth(token, string(serviceName), context.NrfCertPem)
+	if err != nil {
+		return err
+	}
+	return nil
 }
