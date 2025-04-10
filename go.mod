@@ -1,12 +1,11 @@
 module github.com/nycu-ucr/udm
 
-go 1.22
-
-toolchain go1.23.8
+go 1.21
 
 require (
-	github.com/asaskevich/govalidator v0.0.0-20230301143203-a9d515a09cc2
-	github.com/google/uuid v1.6.0
+	github.com/asaskevich/govalidator v0.0.0-20210307081110-f21760c49a8d
+
+	github.com/google/uuid v1.3.0
 	github.com/h2non/gock v1.2.0
 	github.com/nycu-ucr/gin v0.0.0-20230307121200-573befe2dfbe
 	github.com/nycu-ucr/gonet v0.0.0-20231031091538-7b378fb19c77
@@ -14,9 +13,9 @@ require (
 	github.com/nycu-ucr/util v0.0.0-20230928120650-6ed674c090b3
 	github.com/pkg/errors v0.9.1
 	github.com/sirupsen/logrus v1.9.3
-	github.com/stretchr/testify v1.9.0
-	github.com/urfave/cli v1.22.16
-	go.uber.org/mock v0.5.0
+	github.com/stretchr/testify v1.10.0
+	github.com/urfave/cli v1.22.5
+	go.uber.org/mock v0.4.0
 	gopkg.in/yaml.v2 v2.4.0
 )
 
